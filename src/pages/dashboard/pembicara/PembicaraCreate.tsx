@@ -1,19 +1,18 @@
 import { useForm } from "react-hook-form";
-import InputPembicara from "../../../components/InputPembicara";
+import Input from "../../../components/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
+
 type FormData = {
   nama: string;
-  category: string;
-  deskripsi: string;
+  role: string;
 };
 
 const schema = z.object({
   nama: z.string().min(1, "Nama tidak boleh kosong"),
-  category: z.string().min(1, "Kategori tidak boleh kosong"),
-  deskripsi: z.string().min(1, "Deskripsi tidak boleh kosong"),
+  role: z.string().min(1, "Role tidak boleh kosong"),
 });
 
 export default function PembicaraCreate() {
@@ -22,7 +21,7 @@ export default function PembicaraCreate() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(schema), // ⬅️ WAJIB
+    resolver: zodResolver(schema), 
   });
 
   const onSubmit = (data: FormData) => {
@@ -34,33 +33,23 @@ export default function PembicaraCreate() {
       <h1 className="text-2xl font-bold mb-2">Tambah Pembicara</h1>
       <p className="mb-4">Form untuk menambahkan Pembicara</p>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 max-w-md"
-      >
-        {/* Nama Pembicara */}
-        <InputPembicara
-          label="Nama Pembicara"
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label="Nama"
           name="nama"
-          placeholder="Masukkan nama pembicara"
+          placeholder="Masukkan nama category"
           register={register}
           error={errors.nama?.message}
         />
-        <InputPembicara
-          label="Kategori"
-          name="category"
+
+        <Input
+          label="Role"
+          name="role"
+          placeholder="Masukkan role"
           register={register}
-          options={["Seminar", "Kompetisi", "Workshop", "Talkshow"]}
-          error={errors.category?.message}
+          error={errors.role?.message}
         />
 
-        <InputPembicara
-        label="Deskripsi"
-        name="deskripsi"
-        placeholder="Masukkan deskripsi"
-        register={register}
-        error={errors.deskripsi?.message}
-        />
 
         
         {/* Tombol */}

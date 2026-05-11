@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "../components/InputName";
+import Input from "../components/Input";
 import InputPassword from "../components/InputPassword";
 import Button  from "../components/Button";
 

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import InputEvent from "../../../components/InputEvent";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Input from "../../../components/Input";
 
 type FormData = {
   event: string;
@@ -31,30 +31,25 @@ export default function EventCreate() {
       <h1 className="text-2xl font-bold mb-2">Tambah Event</h1>
       <p className="mb-4">Form untuk menambahkan Event baru</p>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 max-w-md"
-      >
-        {/* Nama Event */}
-        <InputEvent
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
           label="Nama Event"
-          name="event"
-          placeholder="Masukkan nama event"
+          name="nama"
+          placeholder="Masukkan nama category"
           register={register}
           error={errors.event?.message}
         />
 
-        {/* Kategori */}
-        <InputEvent
-          label="Kategori"
+        <Input
+          label="Category"
           name="category"
+          placeholder="Masukkan category"
           register={register}
-          options={["Seminar", "Kompetisi", "Workshop", "Talkshow"]}
           error={errors.category?.message}
         />
 
         {/* Tanggal */}
-        <InputEvent
+        <Input
           label="Tanggal Event"
           name="date"
           type="date"

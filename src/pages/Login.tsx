@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "../components/InputName";
+import Input from "../components/Input";
 import InputPassword from "../components/InputPassword";
 import Button  from "../components/Button";
 import { Link } from "react-router-dom";

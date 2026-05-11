@@ -1,4 +1,4 @@
-interface InputNameProps {
+interface InputProps {
   label: string;
   name: string;
   type?: string;
@@ -7,7 +7,7 @@ interface InputNameProps {
   error?: string;
 }
 
-const InputName: React.FC<InputNameProps> = ({
+const Input: React.FC<InputProps> = ({
   label,
   name,
   type = "text",
@@ -34,4 +34,4 @@ const InputName: React.FC<InputNameProps> = ({
   );
 };
 
-export default InputName;
+export default Input;
