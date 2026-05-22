@@ -10,14 +10,14 @@ import Button  from "../components/Button";
 
 type FormData = {
     nama: string;
-    email: string;
+    username: string;
     password: string;
     password_confirm: string;
 }
 
 const schema = z.object({
     nama: z.string().min(1, "Nama tidak boleh kosong!"),
-    email: z.string().email("Email tidak valid"),
+    username: z.string().min(2, "Username harus minimal 2 karakter"),
     password: z.string().min(8, "Minimal 8 Karakter"),
     password_confirm: z.string().min(8, "Minimal 8 Karakter"),
 }).refine((data) => data.password === data.password_confirm, {
@@ -58,11 +58,11 @@ export default function Register(){
                 />
 
                 <Input 
-                    label="Email" 
-                    name="email" 
+                    label="Username" 
+                    name="username" 
                     register={register} 
-                    error={errors.email?.message}
-                    placeholder="email@anda.com"
+                    error={errors.username?.message}
+                    placeholder="Masukkan username dengan format NIM"
                 />
 
                 <InputPassword

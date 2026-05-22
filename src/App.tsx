@@ -17,7 +17,10 @@ import PembicaraIndex from "./pages/dashboard/pembicara/PembicaraIndex";
 import CategoryCreate from "./pages/dashboard/kategori/CategoryCreate";
 import EventCreate from "./pages/dashboard/event/EventCreate";
 import PembicaraCreate from "./pages/dashboard/pembicara/PembicaraCreate";
-
+import EventEdit from "./pages/dashboard/event/EventEdit";
+import PembicaraEdit from "./pages/dashboard/pembicara/PembicaraEdit";
+import CategoryEdit from "./pages/dashboard/kategori/CategoryEdit";
+import ProfileIndex from "./pages/dashboard/profile";
 function App() {
   return (
     <BrowserRouter>
@@ -35,18 +38,29 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Route>
 
-        //route yang dilindungi, hanya bisa diakses jika sudah login
-        <Route element={<ProtectedRoute />}>
-          <Route element={<DashboardLayout />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/category" element={<CategoryIndex />} />
-            <Route path="/dashboard/category/create" element={<CategoryCreate />} />
-            <Route path="/dashboard/event" element={<EventIndex />} />
-            <Route path="/dashboard/event/create" element={<EventCreate />} />
-            <Route path="/dashboard/pembicara" element={<PembicaraIndex />} />
-            <Route path="/dashboard/pembicara/create" element={<PembicaraCreate/>} />
-          </Route>
-        </Route>
+    <Route element={<ProtectedRoute />}>
+  <Route element={<DashboardLayout />}>
+
+    <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/dashboard/profile" element={<ProfileIndex />} />
+
+    {/* CATEGORY */}
+    <Route path="/dashboard/category" element={<CategoryIndex />} />
+    <Route path="/dashboard/category/create" element={<CategoryCreate />} />
+    <Route path="/dashboard/category/edit/:id" element={<CategoryEdit />} />
+
+    {/* EVENT */}
+    <Route path="/dashboard/event" element={<EventIndex />} />
+    <Route path="/dashboard/event/create" element={<EventCreate />} />
+    <Route path="/dashboard/event/edit/:id" element={<EventEdit />} />
+
+    {/* PEMBICARA */}
+    <Route path="/dashboard/pembicara" element={<PembicaraIndex />} />
+    <Route path="/dashboard/pembicara/create" element={<PembicaraCreate />} />
+    <Route path="/dashboard/pembicara/edit/:id" element={<PembicaraEdit />} />
+
+  </Route>
+</Route>
       </Routes>
     </BrowserRouter>
   );

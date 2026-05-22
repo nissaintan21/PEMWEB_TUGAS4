@@ -1,21 +1,24 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Input from "../../../components/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
+const API_URL = "http://localhost:3000";
 
 type FormData = {
-  nama: string;
+  name: string;
   role: string;
 };
 
 const schema = z.object({
-  nama: z.string().min(1, "Nama tidak boleh kosong"),
+  name: z.string().min(1, "Name tidak boleh kosong"),
   role: z.string().min(1, "Role tidak boleh kosong"),
 });
 
 export default function PembicaraCreate() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -23,11 +26,36 @@ export default function PembicaraCreate() {
   } = useForm<FormData>({
     resolver: zodResolver(schema), 
   });
+const onSubmit = async (data: FormData) => {
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-  };
+  try {
 
+    const response = await fetch(
+      `${API_URL}/pembicara`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const result = await response.json();
+
+    console.log(result);
+
+    alert("Pembicara berhasil ditambahkan");
+
+    navigate("/dashboard/pembicara");
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Gagal menambahkan pembicara");
+  }
+};
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-2">Tambah Pembicara</h1>
@@ -36,10 +64,10 @@ export default function PembicaraCreate() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Nama"
-          name="nama"
+          name="name"
           placeholder="Masukkan nama category"
           register={register}
-          error={errors.nama?.message}
+          error={errors.name?.message}
         />
 
         <Input
